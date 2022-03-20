@@ -1,0 +1,52 @@
+<article class="post">
+  <section class="post-head">
+    <h2><%= @post.title %></h2>
+  </section>
+  <section class="service">
+    <small><%= t('show.created_at') + @post.created_at %></small>
+    |
+    <%= link_to t('edit'), edit_path(@post, locale: I18n.locale) %>
+    |
+    <%= link_to t('delete'), post_path(@post,  locale: I18n.locale), data: {method: :delete, confirm: 'You sure?'} %>
+  </section><br />
+  <section class="post-body">
+    <p><%= @post.body %></p>
+  </section>
+</article><br /><hr>
+
+<h4><%= t('comment.add') %></h4><br />
+
+<%= form_for([@post, @post.comments.build]) do |form| %>
+  <div class="field form-group">
+    <label for="exampleFormControlTextarea1"><%= t('comment.comm_text') %></label>
+    <%= form.text_area :body, class: "form-control", id: "exampleFormControlTextarea1", rows: "3" %>
+  </div><br />
+
+  <div class="actions">
+    <%= form.submit t('comment.add'), class: "btn btn-outline-dark me-2" %>
+  </div>
+<% end %><br />
+
+<div id='comments'>
+  <% @post.comments.each do |comm| %>
+    <div class="comment alert">
+      <% id = comm.user_id.to_i %>
+      <% if id != 0 %>
+        <h5><%= user = User.find(id).email + t('write') %></h5>
+
+        <p>
+          <%= comm.body %>
+        </p>
+        <small><%= t('show.created_at') + comm.created_at %></small>
+        |
+        <%= link_to t('delete'), post_comment_path(comm.post, comm, locale: I18n.locale), data: {method: :delete, confirm: 'You sure?'} %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<div id="else">
+
+</div>
+
+<script src="main.js"></script>

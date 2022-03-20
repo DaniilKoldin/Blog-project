@@ -1,0 +1,18 @@
+<div class="container">
+  <h3><%= t('edit_post') %></h3>
+
+  <%= form_with model: @post, html: {multipart: true }, url: posts_path(@post, locale: I18n.locale), method: :patch, local: true do |form| %>
+    <div class="field">
+      <label><%= t('new_post.title') %></label>
+      <%= form.text_field :title, class: "form-control", id: "exampleFormControlInput1" %>
+    </div>
+
+    <div class="field">
+      <label><%= t('new_post.post') %></label>
+      <%= form.text_area :body, class: "form-control", id: "exampleFormControlTextarea1", rows: "3" %>
+    </div><br />
+
+    <%= form.submit t('edit'), :class => 'btn btn-outline-dark me-2' %>
+    <%= link_to t('cancel'), root_path(locale: I18n.locale), class: 'btn btn-outline-dark me-2' %>
+  <% end %>
+</div>

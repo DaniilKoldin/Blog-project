@@ -1,0 +1,19 @@
+<div class="container">
+  <h3><%= t('show.new')%></h3><br />
+
+  <%= form_for :posts, url: posts_path do |form| %>
+    <div class="field form-group">
+      <label for="exampleFormControlTextarea1"><%= t('new_post.title')%></label>
+      <%= form.text_field :title, class: "form-control", id: "exampleFormControlInput1", placeholder: t('new_post.enter_title') %>
+    </div><br />
+
+    <div class="field form-group">
+      <label for="exampleFormControlTextarea1"><%= t('new_post.post') %></label>
+      <%= form.text_area :body, class: "form-control", id: "exampleFormControlTextarea1", rows: "3", placeholder: t('new_post.enter_text') %>
+    </div><br />
+
+    <div class="actions">
+      <%= form.submit t('create'), class: "btn btn-outline-dark me-2" %>
+    </div>
+  <% end %>
+</div>

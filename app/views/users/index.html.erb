@@ -1,0 +1,24 @@
+<div class="container">
+  <h3><%= t('users_table.users')%></h3>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><%= t('users_table.username')%></th>
+        <th><%= t('users_table.reg_date')%></th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.email %></td>
+          <td><%= user.created_at %></td>
+          <td><%= link_to t('users_list.show'), show_user_path(:id => user.id, locale: locale) %></td>
+          <td><%= link_to t('delete'), destroy_user_path(:id => user.id, locale: locale), data: { confirm: 'You sure?' }, method: :delete %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
